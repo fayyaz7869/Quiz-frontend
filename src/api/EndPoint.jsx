@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:5000/api";
+const BASE_URL = "https://quiz-backend-i2vc.onrender.com/api";
 
 export default {
   REGISTER: `${BASE_URL}/auth/register`,
