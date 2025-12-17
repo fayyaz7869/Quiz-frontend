@@ -1,0 +1,29 @@
+.auth-container {
+  display: flex;
+  height: 100vh;
+}
+
+.auth-left {
+  width: 60%;
+  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+              url("/quiz-bg.jpg") center/cover no-repeat;
+  padding: 80px;
+  color: white;
+}
+
+.auth-left .brand {
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.auth-right {
+  width: 40%;
+  padding: 60px;
+  background: #fff;
+}
+
+.divider {
+  text-align: center;
+  margin: 20px 0;
+  color: #999;
+}

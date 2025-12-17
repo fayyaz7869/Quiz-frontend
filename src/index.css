@@ -1,0 +1,156 @@
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Wrapper */
+.auth-wrapper {
+  font-family: "Inter", sans-serif;
+}
+
+/* LEFT IMAGE PANEL */
+.auth-left {
+  background-image: url("https://images.unsplash.com/photo-1523240795612-9a054b0db644");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+}
+
+/* Overlay for readability */
+.auth-overlay {
+  background: rgba(255, 255, 255, 0.85); /* white overlay */
+  padding: 60px;
+  color: #000; /* BLACK TEXT */
+  max-width: 520px;
+}
+
+/* RIGHT CARD */
+.auth-card {
+  width: 100%;
+  max-width: 380px;
+}
+
+/* OR DIVIDER (CENTERED) */
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 20px 0;
+  color: #999;
+  font-size: 14px;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid #ddd;
+}
+
+.divider::before {
+  margin-right: 10px;
+}
+
+.divider::after {
+  margin-left: 10px;
+}
+
+/* RESPONSIVE FIX */
+@media (max-width: 768px) {
+  .auth-left {
+    display: none !important;
+  }
+
+  .auth-card {
+    padding: 20px;
+  }
+}
+
+.navbar-brand {
+  font-weight: bold;
+  font-size: 1.4rem;
+  letter-spacing: .5px;
+}
+.quiz-card:hover {
+  transform: translateY(-5px);
+  transition: 0.2s ease-in-out;
+}
+.nav-link {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+.dashboard-card {
+  min-height: 220px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-5px);
+}
