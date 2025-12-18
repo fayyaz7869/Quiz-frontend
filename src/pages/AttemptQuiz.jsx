@@ -15,6 +15,7 @@ export default function AttemptQuiz() {
   const [current, setCurrent] = useState(0);
   const [answers, setAnswers] = useState({});
   const [timeLeft, setTimeLeft] = useState(0);
+  const [submitted, setSubmitted] = useState(false);
 
   const checkAttempt = async () => {
   const res = await axios.get(
@@ -54,17 +55,18 @@ export default function AttemptQuiz() {
 
 useEffect(() => {
   // Don't start timer until quiz is loaded
-  if (!quiz) return;
+  if (!quiz || submitted) return;
 
   if (timeLeft <= 0) {
-    handleSubmit();
+    setSubmitted(true);
+    handleSubmit(true);
     return;
   }
 
   const timer = setInterval(() => setTimeLeft((t) => t - 1), 1000);
 
   return () => clearInterval(timer);
-}, [timeLeft, quiz]);   // 👈 depend on quiz also
+}, [timeLeft, quiz, submitted]);   
 
 
   // Format time (mm:ss)
@@ -103,12 +105,13 @@ useEffect(() => {
   //   }
   // };
 
-const handleSubmit = async () => {
-  if (!answers || Object.keys(answers).length === 0) {
-    toasterror ("Please answer at least one question");
+const handleSubmit = async (auto = false) => {
+  if(submitted) return;
+  if (!auto && Object.keys(answers).length === 0) {
+    toastError("Please answer at least one question");
     return;
   }
-
+  setSubmitted(true);
   const submitData = {
     answers: Object.keys(answers).map((questionId) => ({
       questionId,
@@ -129,9 +132,7 @@ const handleSubmit = async () => {
 
     navigate("/result", { state: res.data });
   } catch (error) {
-    toast.error(
-      error.response?.data?.message || "Error submitting quiz"
-    );
+    toastError(error.response?.data?.message || "Error submitting quiz");
   }
 };
 

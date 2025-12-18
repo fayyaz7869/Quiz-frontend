@@ -21,6 +21,13 @@ export default function ResultPage() {
         <Link to="/quizzes" className="btn btn-primary mt-3">
           Back to Quizzes
         </Link>
+        <Link
+  to={`/leaderboard/${state.quizId}`}
+  className="btn btn-dark mt-3 ms-2"
+>
+  View Leaderboard
+</Link>
+
       </div>
     </div>
   );
