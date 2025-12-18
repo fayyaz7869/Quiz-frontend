@@ -79,29 +79,62 @@ useEffect(() => {
     setAnswers((prev) => ({ ...prev, [qId]: index }));
   };
 
-  // Submit quiz
-  const handleSubmit = async () => {
-    const submitData = {
-      answers: Object.keys(answers).map((questionId) => ({
-        questionId,
-        selectedOption: answers[questionId],
-      })),
-    };
+  // // Submit quiz
+  // const handleSubmit = async () => {
+  //   const submitData = {
+  //     answers: Object.keys(answers).map((questionId) => ({
+  //       questionId,
+  //       selectedOption: answers[questionId],
+  //     })),
+  //   };
 
-    try {
-      const res = await axios.post(
-        `${Endpoint.SUBMIT_QUIZ}/${quizId}/submit`,
-        submitData,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
+  //   try {
+  //     const res = await axios.post(
+  //       `${Endpoint.SUBMIT_QUIZ}/${quizId}/submit`,
+  //       submitData,
+  //       {
+  //         headers: { Authorization: `Bearer ${token}` },
+  //       }
+  //     );
 
-      navigate("/result", { state: res.data });
-    } catch (error) {
-      toastError("Error submitting quiz")
-    }
+  //     navigate("/result", { state: res.data });
+  //   } catch (error) {
+  //     toastError("Error submitting quiz")
+  //   }
+  // };
+
+const handleSubmit = async () => {
+  if (!answers || Object.keys(answers).length === 0) {
+    toast.error("Please answer at least one question");
+    return;
+  }
+
+  const submitData = {
+    answers: Object.keys(answers).map((questionId) => ({
+      questionId,
+      selectedOption: answers[questionId],
+    })),
   };
+
+  try {
+    const res = await axios.post(
+      `${Endpoint.SUBMIT_QUIZ}/${quizId}/submit`,
+      submitData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    navigate("/result", { state: res.data });
+  } catch (error) {
+    toast.error(
+      error.response?.data?.message || "Error submitting quiz"
+    );
+  }
+};
+
 
   if (!quiz || questions.length === 0)
     return <div className="container mt-5">Loading...</div>;
