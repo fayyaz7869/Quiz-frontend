@@ -4,11 +4,7 @@ export default function ResultPage() {
   const { state } = useLocation();
 
   if (!state)
-    return (
-      <div className="container mt-5">
-        No result data available.
-      </div>
-    );
+    return <div className="container mt-5">No result data available.</div>;
 
   return (
     <div className="container mt-5">
@@ -21,13 +17,14 @@ export default function ResultPage() {
         <Link to="/quizzes" className="btn btn-primary mt-3">
           Back to Quizzes
         </Link>
-        <Link
-  to={`/leaderboard/${state.quizId}`}
-  className="btn btn-dark mt-3 ms-2"
->
-  View Leaderboard
-</Link>
 
+        {/* ✅ FIXED */}
+        <Link
+          to={`/leaderboard/${state.quizId}`}
+          className="btn btn-secondary mt-3 ms-2"
+        >
+          View Leaderboard
+        </Link>
       </div>
     </div>
   );

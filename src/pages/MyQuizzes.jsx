@@ -17,16 +17,17 @@ export default function MyQuizzes() {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      // If creator role -> show ALL quizzes
-      if (user?.role === "creator" || user?.role === "admin") {
-        setQuizzes(res.data);
-      } else {
-        // normal user (shouldn't be able to edit) - show only their created ones
-        const filtered = res.data.filter(
-          (quiz) => quiz.createdBy && quiz.createdBy._id === user?.id
-        );
-        setQuizzes(filtered);
-      }
+ 
+      if (user?.role === "admin") {
+  setQuizzes(res.data);
+} else {
+  // creator → only their quizzes
+  const filtered = res.data.filter(
+    (quiz) => quiz.createdBy?._id === user?._id
+  );
+  setQuizzes(filtered);
+}
+
     } catch (error) {
       console.error(error);
       toastError("Failed to load quizzes");
@@ -59,31 +60,56 @@ export default function MyQuizzes() {
       <div className="row mt-4">
         {quizzes.map((q) => (
           <div key={q._id} className="col-md-4">
-            <div className="card p-3 shadow-sm mb-3">
-              <h4>{q.title}</h4>
-              <p>{q.description}</p>
-              <p className="text-muted">By: {q.createdBy?.name || "Unknown"}</p>
+<div className="card shadow-sm h-100 border-0 rounded-4 mb-4">
+  <div className="card-body d-flex flex-column">
 
-              <Link className="btn btn-sm btn-info me-2" to={`/add-question/${q._id}`}>
-                Add Question
-              </Link>
+    <h5 className="fw-bold text-primary">{q.title}</h5>
+    <p className="text-muted small">{q.description}</p>
 
-              <Link className="btn btn-sm btn-primary me-2" to={`/attempt/${q._id}`}>
-                Start
-              </Link>
+    <span className="text-muted small mb-3">
+      👤 By: {q.createdBy?.name || "Unknown"}
+    </span>
 
-              {/* Only show Edit/Delete to creators and admin */}
-              {(user?.role === "creator" || user?.role === "admin") && (
-                <>
-                  <Link className="btn btn-sm btn-warning me-2" to={`/update-quiz/${q._id}`}>
-                    Edit
-                  </Link>
-                  <button className="btn btn-sm btn-danger" onClick={() => handleDelete(q._id)}>
-                    Delete
-                  </button>
-                </>
-              )}
-            </div>
+    <div className="mt-auto d-grid gap-2">
+
+      <Link
+        to={`/add-question/${q._id}`}
+        className="btn btn-outline-info btn-sm rounded-pill"
+      >
+        ➕ Add Questions
+      </Link>
+
+   
+
+      <Link
+        to={`/leaderboard/${q._id}`}
+        className="btn btn-outline-dark btn-sm rounded-pill"
+      >
+        🏆 View Leaderboard
+      </Link>
+
+      {(user?.role === "creator" || user?.role === "admin") && (
+        <div className="d-flex gap-2 mt-2">
+          <Link
+            to={`/update-quiz/${q._id}`}
+            className="btn btn-warning btn-sm w-50 rounded-pill"
+          >
+            ✏ Edit
+          </Link>
+
+          <button
+            onClick={() => handleDelete(q._id)}
+            className="btn btn-danger btn-sm w-50 rounded-pill"
+          >
+            🗑 Delete
+          </button>
+        </div>
+      )}
+
+    </div>
+  </div>
+</div>
+
           </div>
         ))}
       </div>

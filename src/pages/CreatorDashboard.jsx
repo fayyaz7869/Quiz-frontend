@@ -1,35 +1,68 @@
-import { Link } from "react-router-dom";
+
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
+import { Link } from "react-router-dom";
 
 export default function CreatorDashboard() {
   const { user } = useContext(AuthContext);
 
   return (
-    <div className="container mt-5">
+    <div className="container-fluid px-4 py-5">
 
-      <h2>Welcome, Quiz Creator 🎉</h2>
-      <p className="text-muted">Email: {user.email}</p>
+      {/* HERO SECTION */}
+      <div className="text-center mb-5">
+        <h1 className="fw-bold">
+          Welcome, Quiz Creator 🎉
+        </h1>
+        <p className="text-muted mt-2">
+          {user?.email}
+        </p>
+      </div>
 
-      <div className="row mt-4">
+      {/* ACTION CARDS */}
+      <div className="row justify-content-center g-4">
 
-        <div className="col-md-4">
-          <div className="card p-3 shadow-sm">
-            <h4>Create New Quiz</h4>
-            <p>Start building a new quiz</p>
-            <Link to="/create-quiz" className="btn btn-primary">
-              Create Quiz
-            </Link>
+        {/* CREATE QUIZ */}
+        <div className="col-md-5 col-lg-4">
+          <div className="card shadow-sm border-0 rounded-4 h-100 text-center">
+            <div className="card-body p-4">
+
+              <div className="mb-3 fs-1">📝</div>
+
+              <h4 className="fw-bold">Create New Quiz</h4>
+              <p className="text-muted">
+                Start building a new quiz for users
+              </p>
+
+              <Link
+                to="/create-quiz"
+                className="btn btn-primary w-100 rounded-pill mt-3"
+              >
+                ➕ Create Quiz
+              </Link>
+            </div>
           </div>
         </div>
 
-        <div className="col-md-4">
-          <div className="card p-3 shadow-sm">
-            <h4>My Quizzes</h4>
-            <p>View and manage your created quizzes</p>
-            <Link to="/creator/my-quizzes" className="btn btn-secondary">
-              View Quizzes
-            </Link>
+        {/* MY QUIZZES */}
+        <div className="col-md-5 col-lg-4">
+          <div className="card shadow-sm border-0 rounded-4 h-100 text-center">
+            <div className="card-body p-4">
+
+              <div className="mb-3 fs-1">📚</div>
+
+              <h4 className="fw-bold">My Quizzes</h4>
+              <p className="text-muted">
+                Manage, edit & track your quizzes
+              </p>
+
+              <Link
+                to="/creator/my-quizzes"
+                className="btn btn-outline-dark w-100 rounded-pill mt-3"
+              >
+                👀 View Quizzes
+              </Link>
+            </div>
           </div>
         </div>
 

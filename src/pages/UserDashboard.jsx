@@ -89,18 +89,29 @@ export default function UserDashboard() {
                   Duration: <b>{quiz.duration} min</b>
                 </p>
 
-                <div className="mt-auto d-flex justify-content-between">
-                  <span className="text-muted small">
-                    Creator: {quiz.createdBy?.name}
-                  </span>
 
-                  <Link
-                    to={`/attempt/${quiz._id}`}
-                    className="btn btn-primary btn-sm"
-                  >
-                    Start Quiz →
-                  </Link>
-                </div>
+                <div className="mt-auto">
+  <span className="text-muted small d-block mb-2">
+    Creator: {quiz.createdBy?.name}
+  </span>
+
+  <div className="d-flex gap-2">
+    <Link
+      to={`/attempt/${quiz._id}`}
+      className="btn btn-primary btn-sm w-100"
+    >
+      Start Quiz
+    </Link>
+
+    <Link
+      to={`/leaderboard/${quiz._id}`}
+      className="btn btn-outline-secondary btn-sm w-100"
+    >
+      Leaderboard
+    </Link>
+  </div>
+</div>
+
 
               </div>
             </div>
