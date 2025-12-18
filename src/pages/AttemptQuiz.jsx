@@ -4,7 +4,7 @@ import axios from "axios";
 import Endpoint from "../api/EndPoint";
 import { AuthContext } from "../context/AuthContext";
 import { toastError } from "../utils/toast";
-
+import { toast } from "react-toastify";
 export default function AttemptQuiz() {
   const { quizId } = useParams();
   const navigate = useNavigate();
@@ -105,7 +105,7 @@ useEffect(() => {
 
 const handleSubmit = async () => {
   if (!answers || Object.keys(answers).length === 0) {
-    toast.error("Please answer at least one question");
+    toasterror ("Please answer at least one question");
     return;
   }
 
