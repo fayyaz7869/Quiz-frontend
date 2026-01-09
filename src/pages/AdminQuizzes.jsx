@@ -9,14 +9,14 @@ export default function AdminQuizzes() {
   const [quizzes, setQuizzes] = useState([]);
 
   const loadQuizzes = async () => {
-    try{
-    const res = await axios.get(Endpoint.ADMIN_ALL_QUIZZES, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    setQuizzes(res.data);
-} catch(err){
-    console.error("Failed to load admin quizzes:", err.response?.data || err.message);
-}
+    try {
+      const res = await axios.get(Endpoint.ADMIN_ALL_QUIZZES, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setQuizzes(res.data);
+    } catch (err) {
+      console.error("Failed to load admin quizzes:", err.response?.data || err.message);
+    }
   };
 
   useEffect(() => {
@@ -24,23 +24,42 @@ export default function AdminQuizzes() {
   }, []);
 
   return (
-    <div className="container mt-5">
-      <h2>All Quizzes</h2>
+    <div className="container py-5">
+      <div className="d-flex justify-content-between align-items-center mb-5">
+        <h2 className="fw-bold m-0">📚 All Platform Quizzes</h2>
+        <span className="badge bg-primary rounded-pill px-3 py-2">Total: {quizzes.length}</span>
+      </div>
 
-      <div className="row mt-4">
+      <div className="row g-4">
         {quizzes.map((q) => (
-          <div className="col-md-4" key={q._id}>
-            <div className="card shadow-sm p-3 mb-3">
-              <h4>{q.title}</h4>
-              <p>{q.description}</p>
-              <p><b>Creator:</b> {q.createdBy?.name}</p>
-
-              <Link
-                className="btn btn-primary btn-sm"
-                to={`/admin/questions/${q._id}`}
-              >
-                View Questions
-              </Link>
+          <div className="col-md-6 col-lg-4" key={q._id}>
+            <div className="card h-100 border-0 shadow-sm rounded-4 hover-lift">
+              <div className="card-body p-4 d-flex flex-column">
+                <div className="d-flex justify-content-between mb-2">
+                  <span className="badge bg-light text-primary border border-primary-subtle">
+                    {q.category || "General"}
+                  </span>
+                </div>
+                
+                <h4 className="fw-bold text-dark">{q.title}</h4>
+                <p className="text-muted small flex-grow-1">{q.description}</p>
+                
+                <div className="py-3 border-top mt-3">
+                  <p className="small mb-3">
+                    <span className="text-muted">Creator:</span> <b>{q.createdBy?.name || "Admin"}</b>
+                  </p>
+                  
+                  <div className="d-grid gap-2">
+                    <Link to={`/admin/questions/${q._id}`} className="btn btn-outline-primary btn-sm rounded-pill">
+                      ⚙️ Manage Questions
+                    </Link>
+                    {/* LEADERBOARD OPTION ADDED HERE */}
+                    <Link to={`/leaderboard/${q._id}`} className="btn btn-outline-info btn-sm rounded-pill">
+                      🏆 View Leaderboard
+                    </Link>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         ))}
@@ -48,4 +67,3 @@ export default function AdminQuizzes() {
     </div>
   );
 }
-

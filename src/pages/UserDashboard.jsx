@@ -10,7 +10,6 @@ export default function UserDashboard() {
   const [filtered, setFiltered] = useState([]);
   const [category, setCategory] = useState("all");
 
-  // Load all quizzes
   const loadQuizzes = async () => {
     try {
       const res = await axios.get(Endpoint.GET_QUIZZES, {
@@ -28,105 +27,73 @@ export default function UserDashboard() {
     loadQuizzes();
   }, []);
 
-  // Filter quizzes by category
   const handleCategoryChange = (value) => {
     setCategory(value);
     if (value === "all") setFiltered(quizzes);
     else setFiltered(quizzes.filter((q) => q.category === value));
   };
 
-  return (
-    <div className="container py-4">
+return (
+  <div className="container py-5">
+    {/* Hero Section with Gradient */}
+    <div className="p-5 mb-5 text-white rounded-4 shadow-lg" 
+         style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }}>
+      <h1 className="display-5 fw-bold">Hello, {user?.name || 'Explorer'}! 👋</h1>
+      <p className="lead opacity-75">Ready to crush some quizzes today?</p>
+    </div>
 
-      {/* Welcome Banner */}
-      <div className="p-4 mb-4 bg-primary text-white rounded shadow-sm">
-        <h2>Welcome, {user?.name} 👋</h2>
-        <p>Ready to challenge yourself? Explore quizzes and test your skills!</p>
+    {/* Filtering Section */}
+    <div className="row align-items-center mb-5 bg-light p-3 rounded-3 mx-0 shadow-sm">
+      <div className="col-md-6">
+        <h3 className="mb-0 fw-bold">Available Challenges</h3>
       </div>
-
-      {/* Stats Section */}
-      <div className="row text-center mb-4">
-        <div className="col-md-4">
-          <div className="p-3 bg-white shadow-sm rounded">
-            <h4>Total Quizzes</h4>
-            <h2 className="text-primary">{quizzes.length}</h2>
-          </div>
-        </div>
-      </div>
-
-      {/* Category Filter */}
-      <div className="d-flex justify-content-between align-items-center mb-3">
-        <h3>Available Quizzes</h3>
-
+      <div className="col-md-6 d-flex justify-content-md-end mt-3 mt-md-0">
         <select
-          className="form-select w-auto"
+          className="form-select w-auto border-0 shadow-sm"
           value={category}
           onChange={(e) => handleCategoryChange(e.target.value)}
         >
-          <option value="all">All Categories</option>
-          <option value="Technology">Technology</option>
-          <option value="General Knowledge">General Knowledge</option>
-          <option value="Science">Science</option>
-          <option value="Math">Math</option>
+          <option value="all">🎯 All Topics</option>
+          <option value="Technology">💻 Technology</option>
+          <option value="General Knowledge">🌍 General Knowledge</option>
+          <option value="Science">🔬 Science</option>
+          <option value="Math">🔢 Math</option>
         </select>
       </div>
+    </div>
 
-      {/* Quiz Cards */}
-      <div className="row">
-        {filtered.map((quiz) => (
-          <div key={quiz._id} className="col-md-4 mb-4">
-            <div className="card shadow-sm h-100 quiz-card border-0">
-              <div className="card-body d-flex flex-column">
-
-                <h4 className="card-title text-primary">{quiz.title}</h4>
-                <p className="text-muted">{quiz.description}</p>
-
-                <span className="badge bg-secondary mb-2">
+    {/* Quiz Grid */}
+    <div className="row g-4">
+      {filtered.map((quiz) => (
+        <div key={quiz._id} className="col-md-6 col-lg-4">
+          <div className="card h-100 p-2 rounded-4">
+            <div className="card-body d-flex flex-column">
+              <div className="d-flex justify-content-between align-items-start mb-3">
+                <span className="badge rounded-pill bg-primary-subtle text-primary px-3 py-2">
                   {quiz.category}
                 </span>
-
-                <p className="mb-2">
-                  Duration: <b>{quiz.duration} min</b>
-                </p>
-
-
-                <div className="mt-auto">
-  <span className="text-muted small d-block mb-2">
-    Creator: {quiz.createdBy?.name}
-  </span>
-
-  <div className="d-flex gap-2">
-    <Link
-      to={`/attempt/${quiz._id}`}
-      className="btn btn-primary btn-sm w-100"
-    >
-      Start Quiz
-    </Link>
-
-    <Link
-      to={`/leaderboard/${quiz._id}`}
-      className="btn btn-outline-secondary btn-sm w-100"
-    >
-      Leaderboard
-    </Link>
-  </div>
-</div>
-
-
+                <small className="text-muted fw-bold">⏱ {quiz.duration}m</small>
+              </div>
+              <h4 className="card-title fw-bold">{quiz.title}</h4>
+              <p className="text-muted flex-grow-1">{quiz.description}</p>
+              
+              <div className="pt-3 border-top">
+                <div className="d-flex gap-2">
+                  <Link to={`/attempt/${quiz._id}`} className="btn btn-primary rounded-pill flex-grow-1 py-2">
+                    Start Quiz
+                  </Link>
+                  <Link to={`/leaderboard/${quiz._id}`} className="btn btn-outline-secondary rounded-pill px-3">
+                    🏆
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
-        ))}
-
-        {filtered.length === 0 && (
-          <div className="text-center mt-5">
-            <h5>No quizzes found</h5>
-            <p>Try selecting a different category.</p>
-          </div>
-        )}
-      </div>
+        </div>
+      ))}
     </div>
-  );
+  </div>
+);
 }
 
 

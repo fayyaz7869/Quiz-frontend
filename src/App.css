@@ -122,3 +122,283 @@
   transform: translateY(-4px);
 }
 
+/* Fade-in animation for all pages */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.container, .container-fluid {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* Modern Card Design */
+.card {
+  border: none !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* Button Pulse effect for primary actions */
+.btn-primary {
+  transition: transform 0.2s ease;
+}
+
+.btn-primary:active {
+  transform: scale(0.95);
+}
+
+/* Navbar smooth transition */
+.navbar {
+  transition: background-color 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+.question-transition {
+  animation: slideIn 0.4s ease-out;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+/* This targets the 'rounded-pill' buttons inside your Creator Dashboard */
+.rounded-pill {
+    transition: letter-spacing 0.3s ease, transform 0.2s ease;
+}
+
+/* When you hover over the button, the text spreads out slightly and it pops up */
+.rounded-pill:hover {
+    letter-spacing: 1px; /* Subtle text animation */
+    transform: scale(1.03); /* Slight zoom effect */
+}
+
+/* Enhancing the dashboard card hover effect you already have */
+.dashboard-card:hover {
+    transform: translateY(-8px); /* Lifts the card higher than the current -4px */
+    box-shadow: 0 12px 24px rgba(0,0,0,0.15); /* Makes the shadow deeper on hover */
+}
+/* Custom highlight for Rank #1 */
+.table-warning-custom {
+  background-color: rgba(255, 215, 0, 0.1) !important;
+  border-left: 5px solid #ffd700;
+}
+
+/* Smooth hover effect for table rows */
+.table-hover tbody tr {
+  transition: all 0.2s ease;
+}
+
+.table-hover tbody tr:hover {
+  background-color: #f8f9ff !important;
+  transform: scale(1.01);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  z-index: 1;
+  position: relative;
+}
+
+/* Progress bar animation */
+.progress-bar {
+  transition: width 1s ease-in-out;
+}
+/* Custom Gradients and Colors */
+.bg-purple-gradient {
+  background: linear-gradient(135deg, #6e8efb, #a777e3);
+  color: white;
+}
+
+.btn-primary-gradient {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+}
+
+.btn-success-gradient {
+  background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+  color: white;
+  border: none;
+}
+
+/* Magic Selection Buttons */
+.options-grid {
+  display: grid;
+  gap: 15px;
+}
+
+.option-btn {
+  display: flex;
+  align-items: center;
+  padding: 15px 20px;
+  border: 2px solid #f0f0f0;
+  border-radius: 12px;
+  background: white;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  text-align: left;
+  cursor: pointer;
+  width: 100%;
+  color: #000;
+}
+
+.option-btn:hover {
+  border-color: #a777e3;
+  background-color: #fcfaff;
+  transform: translateX(10px);
+}
+
+.option-btn.selected {
+  border-color: #6e8efb;
+  background-color: #eef2ff;
+  box-shadow: 0 4px 15px rgba(110, 142, 251, 0.2);
+}
+
+.option-letter {
+  background: #f0f0f0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  margin-right: 15px;
+  font-weight: bold;
+  color: #555;
+  transition: all 0.3s ease;
+}
+
+.option-btn.selected .option-letter {
+  background: #6e8efb;
+  color: white;
+}
+
+/* Question Slide-in Magic Animation */
+.question-card-animation {
+  animation: slideAndFade 0.5s ease-out;
+}
+
+@keyframes slideAndFade {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.timer-box {
+  background: #fff0f0;
+  color: #ff4d4d;
+  padding: 8px 16px;
+  border-radius: 50px;
+  border: 1px solid #ffdada;
+}
+/* Smooth hover effect for Admin Cards */
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.hover-lift:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Base styles for the dashboard cards */
+.dashboard-card {
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0,0,0,0.05);
+}
+
+.dashboard-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+}
+
+/* Button polishing */
+.btn-sm.rounded-pill {
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 8px 15px;
+}
+/* src/App.css enhancements */
+
+.transition-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.transition-hover:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12) !important;
+}
+
+/* Ensure card titles are dark and visible */
+.dashboard-card h3 {
+  color: #2d3436;
+}
+
+/* Feature icon styling */
+.feature-icon-small {
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Blockquote styling for the "Good Thoughts" */
+.blockquote p {
+  font-size: 1.4rem;
+  font-style: italic;
+  color: #4a4a4a;
+}
+/* Magic Entrance Animation */
+.animate-fade-in {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Custom Input Styling */
+.custom-input {
+  border: 2px solid #f1f3f5 !important;
+  border-radius: 12px !important;
+  padding: 12px 15px !important;
+  transition: all 0.3s ease !important;
+}
+
+.custom-input:focus {
+  border-color: #667eea !important;
+  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1) !important;
+  background-color: #fff !important;
+}
+
+/* Gradient Background for Header and Button */
+.bg-primary-gradient {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+}
+
+.btn-primary-gradient {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-primary-gradient:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 15px rgba(118, 75, 162, 0.3);
+  color: white;
+}
+
+.btn-primary-gradient:active {
+  transform: translateY(0);
+}
